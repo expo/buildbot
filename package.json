@@ -27,6 +27,17 @@
     "gulp-watch": "^4.3.3"
   },
   "dependencies": {
-    "babel-core": "^5.8.5"
+    "@exponent/koa-api": "^1.0.2",
+    "@exponent/ngrok": "^0.2.0",
+    "@exponent/spawn-async": "^1.1.0",
+    "babel-runtime": "^5.8.5",
+    "freeport-async": "^1.1.0",
+    "instapromise": "^2.0.2",
+    "koa": "^0.21.0",
+    "koa-identify": "^1.2.0",
+    "koa-logger": "^1.3.0",
+    "koa-router": "^5.1.2",
+    "lodash-node": "^3.10.0",
+    "minimist": "^1.1.2"
   }
 }
