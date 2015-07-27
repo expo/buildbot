@@ -5,8 +5,6 @@
 
 var _asyncToGenerator = require('babel-runtime/helpers/async-to-generator')['default'];
 
-var _Promise = require('babel-runtime/core-js/promise')['default'];
-
 const _ = require('lodash-node');
 const freeportAsync = require('freeport-async');
 
@@ -22,36 +20,47 @@ const ngrokAsync = require('./ngrokAsync');
 var BuildbotApi = {
 
   build: {
-    doc: "Runs a build and returns the result if successful",
+    doc: "Will create a build and test it",
     methodAsync: _asyncToGenerator(function* (env, args) {
-      buildAsync().then(function (result) {}, function (err) {});
-
-      return true;
+      return false;
     })
   },
 
-  add: {
-    doc: "Adds two numbers and returns the result",
-    methodAsync: function methodAsync(env, args) {
-      console.log("Called methodAsync");
-      return new _Promise(function (resolve, reject) {
-        var sum = 0;
-        for (var i = 0; i < args.length; i++) {
-          if (!_.isNumber(args[i])) {
-            var err = api.ApiError('TYPE_ERROR', args[i] + " is not a number!");
-            console.error(err);
-            return reject(err);
-          } else {
-            sum += args[i];
-          }
-        }
-        console.log("Added up", args, "to get", sum);
-        return resolve(sum);
+  release: {
+    doc: "Runs a build and returns the result if successful",
+    methodAsync: _asyncToGenerator(function* (env, args) {
+      buildAsync().then(function (result) {
+        console.log("Release completed successfully.");
+      }, function (err) {
+        console.error("Error creating the build!", err, err.stack);
       });
-    }
+
+      return true;
+    })
   }
+
 };
 
+//   add: {
+//     doc: "Adds two numbers and returns the result",
+//     methodAsync: function (env, args) {
+//       console.log("Called methodAsync");
+//       return new Promise(function (resolve, reject) {
+//         var sum = 0;
+//         for (var i = 0; i < args.length; i++) {
+//           if (!_.isNumber(args[i])) {
+//             var err = api.ApiError('TYPE_ERROR', args[i] + " is not a number!");
+//             console.error(err);
+//             return reject(err);
+//           } else {
+//             sum += args[i];
+//           }
+//         }
+//         console.log("Added up", args, "to get", sum);
+//         return resolve(sum);
+//       });
+//     },
+//  },
 var app = koa();
 app.name = 'buildbot';
 app.proxy = true;
